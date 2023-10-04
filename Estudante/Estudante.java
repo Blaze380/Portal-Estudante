@@ -1,4 +1,4 @@
-package Estudante;
+package estudante;
 
 //FUi Estendido kkkkk
 public final class Estudante extends Disciplina {
@@ -8,12 +8,8 @@ public final class Estudante extends Disciplina {
     private String dataNascimento;
     private String nomeEncarregado;
     private int celular;
+    private char genero;
     private String email;
-
-    public Estudante() {
-        super();
-    }
-
     private String senha;
 
     // DADOS ESCOLARES:
@@ -27,7 +23,16 @@ public final class Estudante extends Disciplina {
     private double saldoAtual;
     private double saldoDivida;
 
+    // CONSTRUTOR:
+    public Estudante() {
+        super();
+    }
+
     // GETTERS:
+    public char getGenero() {
+        return genero;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -85,6 +90,10 @@ public final class Estudante extends Disciplina {
     }
 
     // SETTERS:
+    public void setGenero(char genero) {
+        this.genero = genero;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }

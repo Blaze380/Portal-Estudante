@@ -1,4 +1,4 @@
-package Estudante;
+package estudante;
 
 public final class BaseDisciplina {
     /**
@@ -53,15 +53,15 @@ public final class BaseDisciplina {
         this.trabalho = trabalho;
     }
 
-    public void setMedia(double media) {
-        this.media = media;
+    public void setMedia() {
+        this.media = ((this.nota1 + this.nota2 / 2));
     }
 
     public void setExame(double exame) {
         this.exame = exame;
     }
 
-    public void setMediaFinal(double mediaFinal) {
-        this.mediaFinal = mediaFinal;
+    public void setMediaFinal() {
+        this.mediaFinal = this.exame;
     }
 }

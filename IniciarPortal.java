@@ -1,8 +1,11 @@
-import Estudante.Estudante;
-
-class IniciarPortal {
+final class IniciarPortal extends Config {
     public static void main(String[] args) {
-        Estudante oi = new Estudante();
-        oi.disciplina[1].getMediaFinal();
+        construtor();
+        registrarEstudante();
     }
 }
+/**
+ * Compilamento
+ * javac IniciarPortal.java Config.java BaseDisciplina.java Disciplina.java
+ * Estudante.java Docente.java
+ */

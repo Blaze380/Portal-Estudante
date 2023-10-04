@@ -1,0 +1,10 @@
+{
+DADOS_DISCIPLINA
+"nome":
+"nota1":
+"nota2":
+"trabalho":
+"media":
+"exame":
+"mediafinal":
+}

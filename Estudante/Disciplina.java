@@ -1,4 +1,4 @@
-package Estudante;
+package estudante;
 
 public abstract class Disciplina {
     /**
