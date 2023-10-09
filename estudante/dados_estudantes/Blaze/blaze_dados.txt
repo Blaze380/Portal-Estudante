@@ -1,7 +1,0 @@
-"nome":Blaze
-"sobrenome":
-"datanascimento":05/11/2005
-"nomeencarregado":Sony
-"celular":860842024
-"genero":
-"email":

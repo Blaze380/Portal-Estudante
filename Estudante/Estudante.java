@@ -26,6 +26,9 @@ public final class Estudante extends Disciplina {
     // CONSTRUTOR:
     public Estudante() {
         super();
+        this.curso = "Desenvolvimento de Software";
+        this.ano = 1;
+        this.turma = "LDS1";
     }
 
     // GETTERS:

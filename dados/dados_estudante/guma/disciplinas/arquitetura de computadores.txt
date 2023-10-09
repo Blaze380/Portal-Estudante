@@ -1,0 +1,8 @@
+"nome":Arquitetura de Computadores
+"nota1":0.0
+"nota2":0.0
+"trabalho":0.0
+"media":0.0
+"exame":0.0
+"mediafinal":0.0
+"observacao":null

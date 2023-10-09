@@ -1,5 +1,3 @@
-{
-DADOS_DISCIPLINA
 "nome":
 "nota1":
 "nota2":
@@ -7,4 +5,4 @@ DADOS_DISCIPLINA
 "media":
 "exame":
 "mediafinal":
-}
+"observacao":

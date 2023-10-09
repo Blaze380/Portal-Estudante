@@ -5,9 +5,15 @@ public final class BaseDisciplina {
      * Esta Classe Serve como o objecto em Sim de nome da disciplina,notas,etc
      */
     private String nome;
+    private String observacao;
+
     private double nota1, nota2, trabalho, media, exame, mediaFinal;
 
     // GETTERS:
+    public String getObservacao() {
+        return observacao;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -51,6 +57,10 @@ public final class BaseDisciplina {
 
     public void setTrabalho(double trabalho) {
         this.trabalho = trabalho;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
     public void setMedia() {

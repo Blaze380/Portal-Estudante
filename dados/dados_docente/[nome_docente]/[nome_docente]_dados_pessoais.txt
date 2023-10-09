@@ -1,5 +1,3 @@
-{
-DADOS_PESSOAIS
 "nome":
 "sobrenome":
 "datanascimento":
@@ -7,6 +5,3 @@ DADOS_PESSOAIS
 "genero":
 "email":
 "mestradoem":
-"disciplinaconcebida":
-"turmaconcebida":
-}

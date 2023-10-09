@@ -1,4 +1,2 @@
-{
 "nome:" blaze
 "senha:" joao
-}
