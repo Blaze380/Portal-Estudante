@@ -1,0 +1,22 @@
+Linha: 30
+Coluna: 121
+
+#MENU PRINCIPAL
+System.out.println("                                        * * * * * * * * * * * * * * * * * * * ");
+System.out.println("                                        *				       *");
+System.out.println("                                        *       P O R T A L   U S T M       *");
+System.out.println("                                        *				       *");
+System.out.println("                                        * * * * * * * * * * * * * * * * * * * \n");
+System.out.println("                                                1 - Login como Docente");
+System.out.println("                                               2 - Login como Estudante");
+System.out.println("                                                       0 - Sair");
+");
+#MENU LOGIN
+                                     * * * * * * *  D O C E N T E   * * * * * * *
+                                   * * * * * * *   E S T U D A N T E   * * * * * * *
+                                * * * *   R E G I S T R O   E S T U D A N  T E   * * * *
+                                   * * * *   L O G A R   E S T U D A N  T E   * * * *
+System.out.println("                                                   1 - Fazer Login");
+System.out.println("                                                   2 - Criar conta");
+System.out.println("                                                      0 - Voltar");
+

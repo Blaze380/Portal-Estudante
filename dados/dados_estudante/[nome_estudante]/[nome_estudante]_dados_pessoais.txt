@@ -1,7 +1,0 @@
-"nome":
-"sobrenome":
-"datanascimento":
-"nomeencarregado":
-"celular":
-"genero":
-"email":

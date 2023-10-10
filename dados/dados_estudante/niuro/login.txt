@@ -1,2 +1,2 @@
 "nome":Niuro
-"senha":blaze
+"senha":h

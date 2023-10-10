@@ -1,5 +1,7 @@
 package estudante;
 
+import java.util.Scanner;
+
 //FUi Estendido kkkkk
 public final class Estudante extends Disciplina {
     // DADOS PESSOAIS:
@@ -23,12 +25,151 @@ public final class Estudante extends Disciplina {
     private double saldoAtual;
     private double saldoDivida;
 
+    // MISCELÂNEA
+    private Scanner scanner = new Scanner(System.in);
+
     // CONSTRUTOR:
     public Estudante() {
         super();
         this.curso = "Desenvolvimento de Software";
         this.ano = 1;
         this.turma = "LDS1";
+    }
+
+    // MÉTODO ALTERAR DADOS()
+    public void alterarDados(String dado) {
+        switch (dado) {
+            case "celular":
+
+                System.out.print("Celular: ");
+                setCelular(scanner.nextInt());
+                break;
+            case "email":
+                System.out.print("E-mail: ");
+                setEmail(scanner.next());
+                break;
+            case "senha":
+                while (true) {
+                    String senha, confSenha;
+                    System.out.print("Senha: ");
+                    senha = scanner.next();
+                    System.out.print("Confirmar Senha: ");
+                    confSenha = scanner.next();
+                    if (senha.equals(confSenha)) {
+                        setSenha(confSenha);
+                        break;
+                    } else {
+                        System.out.println("Senha Incorrecta!");
+                    }
+                }
+                break;
+        }
+    }
+
+    // MÉTODO REGISTRAR
+    //////////////////////////////////////////////////////////////////////////////////
+    public void registrar() {
+
+        // NOME:
+        System.out.print("Nome: ");
+        setNome(scanner.next());
+
+        // SOBRENOME:
+        System.out.print("Sobrenome: ");
+        setSobreNome(scanner.next());
+
+        // DATA DE NASCIMENTO:
+        System.out.print("Data de nascimento(dd/mm/aaaa): ");
+        setDataNascimento(scanner.next());
+
+        // NOME DO ENCARREGADO:
+        System.out.print("Nome do encarregado: ");
+        setNomeEncarregado(scanner.next());
+
+        // NÚMERO DO CELULAR
+        System.out.print("Celular: ");
+        setCelular(scanner.nextInt());
+
+        // GÊNERO:
+        System.out.print("1 - Masculino \n2 - Femenino \n:");
+        switch (scanner.nextInt()) {
+            case 1:
+                setGenero('M');
+                break;
+            case 2:
+                setGenero('F');
+                break;
+        }
+
+        // E-MAIL:
+        System.out.print("E-mail: ");
+        setEmail(scanner.next());
+
+        // SENHA:
+        while (true) {
+            String senha, confSenha;
+            System.out.print("Senha: ");
+            senha = scanner.next();
+            System.out.print("Confirmar Senha: ");
+            confSenha = scanner.next();
+            if (senha.equals(confSenha)) {
+                setSenha(confSenha);
+                break;
+            } else {
+                System.out.println("Senha Incorrecta!");
+            }
+        }
+    }
+    // FIM MÉTODO REGISTRAR
+    //////////////////////////////////////////////////////////////////////////////////
+
+    public String salvarDisciplina(int i) {
+        String dados = "";
+        dados = "\"nome\":" + disciplina[i].getNome() +
+                "\n\"nota1\":" + disciplina[i].getNota1() +
+                "\n\"nota2\":" + disciplina[i].getNota2() +
+                "\n\"trabalho\":" + disciplina[i].getTrabalho() +
+                "\n\"media\":" + disciplina[i].getMedia() +
+                "\n\"exame\":" + disciplina[i].getExame() +
+                "\n\"mediafinal\":" + disciplina[i].getMediaFinal() +
+                "\n\"observacao\":" + disciplina[i].getObservacao();
+
+        return dados;
+    }
+
+    public String salvarFinancas() {
+        String dados = "";
+        dados = "\"saldoatual\":" + getSaldoAtual() + "\n\"saldodivida\":" + getSaldoDivida();
+        return dados;
+
+    }
+
+    public String salvarLogin() {
+        String dados = "";
+        dados = "\"nome\":" + getNome() + "\n\"senha\":" + getSenha();
+        return dados;
+    }
+
+    public String salvarPessoal() {
+        String dados = "";
+        dados = "\"nome\":" + getNome() +
+                "\n\"sobrenome\":" + getSobreNome() +
+                "\n\"datanascimento\":" + getDataNascimento() +
+                "\n\"nomeencarregado\":" + getNomeEncarregado() +
+                "\n\"celular\":" + getCelular() +
+                "\n\"genero\":" + getGenero() +
+                "\n\"email\":" + getEmail();
+        return dados;
+    }
+
+    public String salvarEscolar() {
+        String dados = "";
+        dados = "\"curso\":" + getCurso() +
+                "\n\"ano\":" + getAno() +
+                "\n\"numero\":" + getNumero() +
+                "\n\"turma\":" + getTurma() +
+                "\n\"codigoestudante\":" + getCodigoEstudante();
+        return dados;
     }
 
     // GETTERS:

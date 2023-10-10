@@ -1,9 +1,14 @@
 //javac IniciarPortal.java Config.java BaseDisciplina.java Disciplina.java Estudante.java Docente.java
-final class IniciarPortal extends Config {
+
+import resources.Config;
+
+final class IniciarPortal extends Config implements Runnable {
     private static String login = "";
+    static IniciarPortal thisClasse = new IniciarPortal();
+    static Thread novaThread = new Thread(thisClasse);
 
     public static void main(String[] args) {
-        construtor();
+        novaThread.start();
         menuPrincipal();
         // registrarEstudante();
     }
@@ -76,6 +81,20 @@ final class IniciarPortal extends Config {
                 System.out.println(
                         "\n\n                                   * * * * * * *   E S T U D A N T E   * * * * * * *\n\n");
                 break;
+        }
+    }
+
+    @Override
+    public void run() {
+        construtor();
+        hasFinished = !hasFinished;
+        novaThreadExec();
+        System.out.println("Terminado!");
+    }
+
+    synchronized void novaThreadExec() {
+        while (suspend) {
+            delayTime(1000);
         }
     }
 }

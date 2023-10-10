@@ -1,7 +1,0 @@
-"nome":GUma
-"sobrenome":as
-"datanascimento":asd
-"nomeencarregado":g
-"celular":2
-"genero":F
-"email":5

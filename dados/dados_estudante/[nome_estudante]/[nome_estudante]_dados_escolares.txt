@@ -1,5 +1,0 @@
-"curso":
-"ano":
-"numero":
-"turma":
-"codigoestudante":

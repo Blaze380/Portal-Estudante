@@ -1,7 +1,12 @@
 
-"nome"::molina/1
-"nome"::qua/1
-"nome"::madumane/1
-"nome"::laoas/1
-"nome"::GUma/1
-"nome":USI/1
+"nome":Niuro/1
+"nome":madumane/2
+"nome":ro/3
+"nome":uo/4
+"nome":Nuo/5
+"nome":iuro/6
+"nome":o/7
+"nome":u/8
+"nome":Niuro/9
+"nome":MUzaya/10
+"nome":Tomas/1
