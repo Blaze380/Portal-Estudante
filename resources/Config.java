@@ -1,52 +1,54 @@
 package resources;
 
-import estudante.Estudante;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
-import docente.Docente;
+import resources.student.Student;
+import resources.teacher.Teacher;
 
 public abstract class Config {
-    protected static Estudante estudante[] = new Estudante[30];
-    protected static Docente docente[] = new Docente[5];
+    protected static Student student[] = new Student[30];
+    protected static Teacher teacher[] = new Teacher[5];
     protected static String dadosLogin = "";
     protected static String dados = "";
     protected static Scanner scanner = new Scanner(System.in);
     protected static int opcao = 0;
-    protected static boolean hasDelay = true;
-    protected static boolean hasFinished = false;
-    protected static boolean sair = false;
-    protected static boolean suspend = true;
+    protected static boolean hasAnimationDelay = true;
+    protected static boolean threadHasFinishedWorking = false;
+    protected static boolean threadHasSuspended = true;
+    protected static boolean quitLoop = false;
     protected static String usuario = "";
     protected static String senha = "";
-    protected static Arquivos arquivo = new Arquivos();
+    protected static Archive archive = new Archive();
 
-    protected static void regEstudantePessoais(int i) {
-        estudante[i].registrar();
+    protected static void regEstudantePessoais(int position) {
+        student[position].registerStudent();
         System.out.println("\nAguarde...Salvando os seus arquivos!\n");
-        estudanteSavePoint(estudante[i].getNome(), i);
+        estudanteSavePoint(student[position].getName(), position);
 
-        estudantePessoalSalv(i);
-        estudanteLoginSalv(i);
-        estudanteFinancaSalv(i);
-        estudanteEscolarSalv(i);
-        estudanteDisciplinaSalv(i);
+        saveStudentPersonalData(position);
+        saveStudentLoginData(position);
+        saveStudentFinancialData(position);
+        saveStudentShoolData(position);
+        saveStudentSubjectData(position);
     }
 
     /**
-     * Este método serve para salvar os dados das disciplinas dos estudantes
+     * Saves The changes of the student data
      * 
-     * @param i
+     * @param position The position of the current student
      */
-    protected static void estudanteDisciplinaSalv(int i) {
-        for (int j = 0; j < estudante[i].disciplina.length; j++) {
-            dados = estudante[i].salvarDisciplina(j);
-            arquivo.criarArquivo(estudante[i].disciplina[j].getNome(),
+    protected static void saveStudentSubjectData(int position) {
+        for (int i = 0; i < student[position].subject.length; i++) {
+            dados = student[position].saveSubjectData(i);
+            archive.createFile(student[position].subject[i].getName(),
                     dados,
-                    arquivo.diretorio(arquivo.pathEstudante(estudante[i].getNome().toLowerCase() + "\\disciplinas\\")));
+                    archive.createDiretoryPath(
+                            archive.getStudentPath(student[position].getName().toLowerCase() + "\\disciplinas\\")));
 
         }
     }
@@ -58,19 +60,20 @@ public abstract class Config {
     protected static void estudanteSavePoint(String nome, int i) {
         String caminho = "\n\"nome\":";
         dados = "";
-        int limiteLinhas = 1 + arquivo.contadorLinha(arquivo.diretorio(".\\dados"), "\\log_estudantes.txt", "log");
+        int limiteLinhas = 1
+                + archive.contadorLinha(archive.createDiretoryPath(".\\dados"), "\\log_estudantes.txt", "log");
         String dadoEstudante = "";
         for (int j = 2; j <= limiteLinhas; j++) {
             // dadoEstudante = content.toString().substring(linha.indexOf(":") + 1);
-            dadoEstudante = arquivo.lerArquivo(j,
-                    arquivo.diretorio(".\\dados"), "\\log_estudantes.txt");
+            dadoEstudante = archive.loadAndReadFile(j,
+                    archive.createDiretoryPath(".\\dados"), "\\log_estudantes.txt");
             dadoEstudante = dadoEstudante.substring(dadoEstudante.indexOf(":") + 1);
             dados += caminho + dadoEstudante;
             System.out.println(dadoEstudante);
             loadEstudante(dadoEstudante);
         }
         dados += caminho + nome.toLowerCase() + "/" + i;
-        arquivo.criarArquivo("log_estudantes", dados, arquivo.diretorio(".\\dados"));
+        archive.createFile("log_estudantes", dados, archive.createDiretoryPath(".\\dados"));
     }
 
     /**
@@ -83,57 +86,87 @@ public abstract class Config {
     }
 
     /**
-     * MÉTODO SALVAR LOGIN DO ESTUDANTE
+     * Saves The student login data in its file path
+     *
+     * @param position the Position Of the Current Student
+     * @see METHODS:
+     * @see createFile
+     * @see createDiretoryPath
+     * @see getStudentPath
+     * @see saveLoginData
      */
-    protected static void estudanteLoginSalv(int i) {
-        dados = estudante[i].salvarLogin();
-        arquivo.criarArquivo("login", dados,
-                arquivo.diretorio(arquivo.pathEstudante(estudante[i].getNome().toLowerCase())));
+    protected static void saveStudentLoginData(int position) {
+        dados = student[position].saveLoginData();
+        archive.createFile("login", dados,
+                archive.createDiretoryPath(archive.getStudentPath(student[position].getName().toLowerCase())));
     }
 
     /**
-     * MÉTODO SALVAR DADOS FINANCEIROS DO ESTUDANTE
+     * Saves The student financial data in its file path
+     *
+     * @param position the Position Of the Current Student
+     * @see Archive#createFile
+     * @see Archive#createDiretoryPath
+     * @see Archive#getStudentPath
+     * @see Archive#saveFinancialData
      */
-    protected static void estudanteFinancaSalv(int i) {
-        dados = estudante[i].salvarFinancas();
-        arquivo.criarArquivo("financas", dados,
-                arquivo.diretorio(arquivo.pathEstudante(estudante[i].getNome().toLowerCase())));
+    protected static void saveStudentFinancialData(int position) {
+        dados = student[position].saveFinancialData();
+        archive.createFile("financas", dados,
+                archive.createDiretoryPath(archive.getStudentPath(student[position].getName().toLowerCase())));
     }
 
     /**
-     * MÉTODO SALVAR DADOS ESCOLARES DO ESTUDANTE
+     * Saves The student school data in its file path
+     *
+     * @param position the Position Of the Current Student
+     * @see METHODS:
+     * @see createFile
+     * @see createDiretoryPath
+     * @see getStudentPath
+     * @see saveSchoolData
      */
-    protected static void estudanteEscolarSalv(int i) {
-        dados = estudante[i].salvarEscolar();
-        arquivo.criarArquivo("escola", dados,
-                arquivo.diretorio(arquivo.pathEstudante(estudante[i].getNome().toLowerCase())));
+    protected static void saveStudentShoolData(int position) {
+        dados = student[position].saveSchoolData();
+        archive.createFile("escola", dados,
+                archive.createDiretoryPath(archive.getStudentPath(student[position].getName().toLowerCase())));
+    }
+
+    /******************************************************
+     * Saves The student personal data in its file path
+     *
+     * @param position the Position Of the Current Student
+     * @see METHODS:
+     * @see createFile
+     * @see createDiretoryPath
+     * @see getStudentPath
+     * @see savePersonalData
+     */
+    protected static void saveStudentPersonalData(int position) {
+        dados = student[position].savePersonalData();
+        archive.createFile("pessoal", dados,
+                archive.createDiretoryPath(archive.getStudentPath(student[position].getName().toLowerCase())));
     }
 
     /**
-     * MÉTODO SALVAR DADOS PESSOAIS DO ESTUDANTE
-     */
-    protected static void estudantePessoalSalv(int i) {
-        dados = estudante[i].salvarPessoal();
-        arquivo.criarArquivo("pessoal", dados,
-                arquivo.diretorio(arquivo.pathEstudante(estudante[i].getNome().toLowerCase())));
-    }
-
-    /**
-     * Este método é o construtor fake kkkk
-     * Ele instancia as classes "Estudante" e "Docente" em suas
-     * Respectivas arrays
+     * This is the Fake constructor
+     * 
+     * @Functionality it Creates objects in student's array and teacher's array
      */
     protected static void construtor() {
-        for (byte i = 0; i < estudante.length; i++) {
-            estudante[i] = new Estudante();
-            if (i < docente.length) {
-                docente[i] = new Docente();
+        for (byte i = 0; i < student.length; i++) {
+            student[i] = new Student();
+            if (i < teacher.length) {
+                teacher[i] = new Teacher();
             }
         }
     }
 
     /**
-     * Limpador de console
+     * Cleans the console
+     * 
+     * @throws IOException
+     * @throws InterruptedException
      */
     protected static final void cleanConsole() {
         try {
@@ -146,12 +179,13 @@ public abstract class Config {
     /**
      * Este método serve para causar atraso,permitindo animações ao programa
      * 
-     * @param miliSegundos
+     * @param milliseconds the time(in milliseconds) to make delay
+     * @throws InterruptedException
      */
-    protected static void delayTime(long miliSegundos) {
+    protected static void makeDelay(long milliseconds) {
         try {
-            if (hasDelay) {
-                Thread.sleep(miliSegundos);
+            if (hasAnimationDelay) {
+                Thread.sleep(milliseconds);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -163,34 +197,27 @@ public abstract class Config {
      * Sistema de Loading Bar genérica dependendo de thread secundária
      */
     protected static void loadingBar() {
-        while (!hasFinished) {
+        while (!threadHasFinishedWorking) {
             System.out.print("Carregando");
             for (int j = 1; j < 5; j++) {
                 System.out.print(".");
-                delayTime(200);
+                makeDelay(200);
             }
             cleanConsole();
         }
     }
 
     /**
-     * Esse método atribui os caminhos padrão de estudante e docente
-     */
-
-    /**
-     * Este método permite Fazer a criação dos arquivo,ao mesmo tempo modificar ele
-     * se já criados
+     * updates the current student data
      * 
-     * @param tipo  "login,pessoal,finaneiro,escolar"
-     * @param pasta
-     * @param i
+     * @param postion the position of the current student
      */
 
-    protected static void atualizarEstudante(int i) {
-        estudantePessoalSalv(i);
-        estudanteLoginSalv(i);
-        estudanteFinancaSalv(i);
-        estudanteEscolarSalv(i);
-        estudanteDisciplinaSalv(i);
+    protected static void updateStudentData(int postion) {
+        saveStudentPersonalData(postion);
+        saveStudentLoginData(postion);
+        saveStudentFinancialData(postion);
+        saveStudentShoolData(postion);
+        saveStudentSubjectData(postion);
     }
 }

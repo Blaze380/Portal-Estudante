@@ -3,17 +3,17 @@
 import resources.Config;
 
 final class IniciarPortal extends Config implements Runnable {
-    private static String login = "";
-    static IniciarPortal thisClasse = new IniciarPortal();
-    static Thread novaThread = new Thread(thisClasse);
+    private static String typeOfPersonLogin = "";
+    static IniciarPortal thisClass = new IniciarPortal();
+    static Thread secondaryThread = new Thread(thisClass);
 
     public static void main(String[] args) {
-        novaThread.start();
-        menuPrincipal();
+        secondaryThread.start();
+        mainMenu();
         // registrarEstudante();
     }
 
-    static void menuPrincipal() {
+    static void mainMenu() {
         loadingBar();
         System.out.println("Powered By BL4Z3 \n\n\n\n");
         System.out.println("                                        * * * * * * * * * * * * * * * * * * * ");
@@ -28,11 +28,11 @@ final class IniciarPortal extends Config implements Runnable {
         opcao = scanner.nextInt();
         switch (opcao) {
             case 1:
-                login = "docente";
+                typeOfPersonLogin = "docente";
                 loginMenu();
                 break;
             case 2:
-                login = "estudante";
+                typeOfPersonLogin = "estudante";
                 loginMenu();
                 break;
         }
@@ -65,14 +65,14 @@ final class IniciarPortal extends Config implements Runnable {
                 registrarEstudante();
                 break;
             case 0:
-                menuPrincipal();
+                mainMenu();
                 break;
 
         }
     }
 
     static void membro() {
-        switch (login) {
+        switch (typeOfPersonLogin) {
             case "docente":
                 System.out.println(
                         "\n\n                                     * * * * * * *  D O C E N T E   * * * * * * *\n\n");
@@ -87,14 +87,14 @@ final class IniciarPortal extends Config implements Runnable {
     @Override
     public void run() {
         construtor();
-        hasFinished = !hasFinished;
-        novaThreadExec();
+        threadHasFinishedWorking = !threadHasFinishedWorking;
+        suspendSecondaryThread();
         System.out.println("Terminado!");
     }
 
-    synchronized void novaThreadExec() {
-        while (suspend) {
-            delayTime(1000);
+    synchronized void suspendSecondaryThread() {
+        while (threadHasSuspended) {
+            makeDelay(1000);
         }
     }
 }
