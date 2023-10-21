@@ -1,0 +1,7 @@
+"name":Niuro
+"lastname":orlando
+"birthdate":13
+"nameincharge":a
+"phone":221
+"gender":F
+"email":as#

@@ -1,4 +1,4 @@
-package resources;
+package resources.utilities;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-final class Archive {
+public final class Archive {
     /**
      * Creates a file, nothing else to say LOL
      * 
@@ -16,7 +16,7 @@ final class Archive {
      * @see #insertFileFormatAndName
      * @see #createDiretoryPath
      */
-    void createFile(String fileName, String fileContent, File filePath) {
+    public void createFile(String fileName, String fileContent, File filePath) {
         fileName = insertFileFormatAndName(fileName, ".txt");
         // Creating the file
         try (FileWriter file = new FileWriter(filePath + File.separator + fileName);) {
@@ -43,8 +43,8 @@ final class Archive {
      * @param studentName The Student name
      * @return The Path that contains the student data
      */
-    String getStudentPath(String studentName) {
-        return ".\\dados\\dados_estudante\\" + studentName;
+    public String getStudentPath(String studentName) {
+        return ".\\data\\student_data\\" + studentName.toLowerCase();
     }
 
     /**
@@ -53,8 +53,8 @@ final class Archive {
      * @param teacherName The teacher name
      * @return Teacher path that contains his data
      */
-    String getTeacherPath(String teacherName) {
-        return ".\\dados\\dados_docente\\" + teacherName;
+    public String getTeacherPath(String teacherName) {
+        return ".\\data\\teacher_data\\" + teacherName.toLowerCase();
     }
 
     /**
@@ -63,7 +63,7 @@ final class Archive {
      * @param path The Path to acess
      * @return filePath object
      */
-    File createDiretoryPath(String path) {
+    public File createDiretoryPath(String path) {
         File filePath = new File(path);
         if (!filePath.exists()) {
             filePath.mkdirs();
@@ -81,7 +81,7 @@ final class Archive {
      * @return A single line of the file content
      * @see #stringBuilder
      */
-    String loadAndReadFile(int lineSkipper, File filePath, String fileName) {
+    public String loadAndReadFile(int lineSkipper, File filePath, String fileName) {
         String fileContent = "";
         try (FileReader fileReader = new FileReader(filePath + fileName)) {
             BufferedReader lineReader = new BufferedReader(fileReader);
@@ -113,7 +113,7 @@ final class Archive {
         return builder.toString();
     }
 
-    int contadorLinha(File diretorio, String arquivo, String tipo) {
+    public int contadorLinha(File diretorio, String arquivo, String tipo) {
         int contador = 0;
         try (FileReader leitorArquivo = new FileReader(diretorio + arquivo)) {
             String linha = "";

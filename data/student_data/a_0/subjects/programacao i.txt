@@ -1,0 +1,8 @@
+"name":Programacao I
+"note1":0.0
+"note2":0.0
+"job":0.0
+"average":0.0
+"exam":0.0
+"finalaverage":0.0
+"observation":null

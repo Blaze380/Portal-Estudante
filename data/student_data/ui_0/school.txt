@@ -1,0 +1,5 @@
+"course":Desenvolvimento de Software
+"year":1
+"number":0
+"stream":LDS1
+"studentcode":0

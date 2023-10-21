@@ -42,105 +42,70 @@ public final class Student extends Subject {
      * 
      * @param dataToChange It can be Phone, E-mail or Password
      */
-    public void alterarDados(String dataToChange) {
+    public void changeData(String dataToChange) {
         switch (dataToChange) {
             case "phone":
-                changePhoneNumber();
+                setPhone();
                 break;
             case "email":
-                changeEmail();
+                setEmail();
                 break;
             case "password":
-                changePassword();
+                setPassword();
                 break;
-        }
-    }
-
-    private void changePhoneNumber() {
-        System.out.print("Celular: ");
-        setPhone(scanner.nextInt());
-    }
-
-    private void changeEmail() {
-        System.out.print("E-mail: ");
-        setEmail(scanner.next());
-    }
-
-    private void changePassword() {
-        while (true) {
-            String password, confirmPassword;
-            System.out.print("Senha: ");
-            password = scanner.next();
-            System.out.print("Confirmar senha: ");
-            confirmPassword = scanner.next();
-            if (password.equals(confirmPassword)) {
-                setPassword(confirmPassword);
-                break;
-            } else {
-                System.out.println("password Incorrecta!");
-            }
         }
     }
 
     /**
-     * Records the student's personal data including name, password,
+     * Saves the student's personal data including name, password,
      * telephone number, etc.
      */
     public void registerStudent() {
+        setName();
+        setLastName();
+        setBirthDate();
+        setNameInCharge();
+        setPhone();
+        setGender();
+        setEmail();
+        setPassword();
 
-        // NAME:
-        System.out.print("Nome: ");
-        setName(scanner.next());
-
-        // LASTNOME:
-        System.out.print("Sobrenome: ");
-        setLastName(scanner.next());
-
-        // BIRTH DATE
-        System.out.print("Data de nascimento(dd/mm/aaaa): ");
-        setBirthDate(scanner.next());
-
-        // NAME IN CHARGE
-        System.out.print("Nome do encarregado: ");
-        setNameInCharge(scanner.next());
-
-        // PHONE NUMBER
-        System.out.print("Celular: ");
-        setPhone(scanner.nextInt());
-
-        // GENDER
-        System.out.print("1 - Masculino \n2 - Femenino \n:");
-        switch (scanner.nextInt()) {
-            case 1:
-                setGender('M');
-                break;
-            case 2:
-                setGender('F');
-                break;
-        }
-
-        // E-MAIL:
-        System.out.print("E-mail: ");
-        setEmail(scanner.next());
-
-        // password:
-        while (true) {
-            String password, confirmPassword;
-            System.out.print("password: ");
-            password = scanner.next();
-            System.out.print("Confirmar password: ");
-            confirmPassword = scanner.next();
-            if (password.equals(confirmPassword)) {
-                setPassword(confirmPassword);
-                break;
-            } else {
-                System.out.println("password Incorrecta!");
-            }
-        }
     }
 
-    // FIM MÉTODO REGISTRAR
-    //////////////////////////////////////////////////////////////////////////////////
+    public String printSchoolData() {
+        String schoolData = "Nome: " + getName() +
+                "\nCodigo: " + getStudentCode() +
+                "\nCurso: " + getCourse() +
+                "\nAno: " + getYear();
+        return schoolData;
+    }
+
+    public String printSubjectData(int position) {
+        String subjectData = subject[position].getName() + "  " + subject[position].getNote1() + "  "
+                + subject[position].getNote2() + "  "
+                + subject[position].getJob() + "  " + subject[position].getAverage() + "  "
+                + subject[position].getExam() + "  "
+                + subject[position].getFinalAverage() + "   " + subject[position].getObservation();
+        return subjectData;
+    }
+
+    public String printFinancialData() {
+        String financialData = "Nome: " + getName() +
+                "\nSaldo: " + getCurrentBalance() +
+                "\nSaldo em divida: " + getDebtBalance();
+        return financialData;
+    }
+
+    public String printPersonalData() {
+        String personalData = "Nome completo: " + getName() + " " + getLastName() +
+                "\nData de Nascimento: " + getBirthDate() +
+                "\nCelular: " + getPhone() +
+                "\nE-mail: " + getEmail() +
+                "\nNome do encarregado: " + getNameInCharge() +
+                "\nSenha: ******";
+        return personalData;
+    }
+
     /**
      * It Saves the subject data
      * 
@@ -156,7 +121,7 @@ public final class Student extends Subject {
      */
     public String saveSubjectData(int position) {
         String subjectData = "";
-        subjectData = "\"nome\":" + subject[position].getName() +
+        subjectData = "\"name\":" + subject[position].getName() +
                 "\n\"note1\":" + subject[position].getNote1() +
                 "\n\"note2\":" + subject[position].getNote2() +
                 "\n\"job\":" + subject[position].getJob() +
@@ -177,7 +142,8 @@ public final class Student extends Subject {
      */
     public String saveFinancialData() {
         String financialData = "";
-        financialData = "\"currentbalance\":" + getCurrentBalance() + "\n\"debtbalance\":" + getDebtBalance();
+        financialData = "\"currentbalance\":" + getCurrentBalance() +
+                "\n\"debtbalance\":" + getDebtBalance();
         return financialData;
 
     }
@@ -191,7 +157,8 @@ public final class Student extends Subject {
      */
     public String saveLoginData() {
         String loginData = "";
-        loginData = "\"name\":" + getName() + "\n\"password\":" + getPassword();
+        loginData = "\"name\":" + getName() +
+                "\n\"password\":" + getPassword();
         return loginData;
     }
 
@@ -221,11 +188,6 @@ public final class Student extends Subject {
     /**
      * It saves all school date and return in a string
      * 
-     * @param year       the current year in the school
-     * @param course     course
-     * @param number     position in the classrom
-     * @param stream     the class
-     * @param studenCode the unique student code
      * @return schoolData
      */
     public String saveSchoolData() {
@@ -238,132 +200,153 @@ public final class Student extends Subject {
         return schoolData;
     }
 
+    // GETTERS
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastNome) {
-        this.lastName = lastNome;
-    }
-
     public String getBirthDate() {
         return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
     }
 
     public String getNameInCharge() {
         return nameInCharge;
     }
 
-    public void setNameInCharge(String nameInCharge) {
-        this.nameInCharge = nameInCharge;
-    }
-
     public int getPhone() {
         return phone;
-    }
-
-    public void setPhone(int phone) {
-        this.phone = phone;
     }
 
     public char getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
-        this.gender = gender;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getCourse() {
         return course;
-    }
-
-    public void setCourse(String course) {
-        this.course = course;
     }
 
     public byte getYear() {
         return year;
     }
 
-    public void setYear(byte year) {
-        this.year = year;
-    }
-
     public byte getNumber() {
         return number;
-    }
-
-    public void setNumber(byte number) {
-        this.number = number;
     }
 
     public String getStream() {
         return stream;
     }
 
-    public void setStream(String stream) {
-        this.stream = stream;
-    }
-
     public int getStudentCode() {
         return studentCode;
-    }
-
-    public void setStudentCode(int studentCode) {
-        this.studentCode = studentCode;
     }
 
     public double getCurrentBalance() {
         return currentBalance;
     }
 
-    public void setCurrentBalance(double currentBalance) {
-        this.currentBalance = currentBalance;
-    }
-
     public double getDebtBalance() {
         return debtBalance;
+    }
+
+    // SETTERS
+    public void setName() {
+        System.out.print("Nome: ");
+        this.name = scanner.next();
+    }
+
+    public void setPhone() {
+        System.out.print("Celular: ");
+        this.phone = scanner.nextInt();
+    }
+
+    public void setGender() {
+        System.out.print("1 - Masculino \n2 - Femenino \n:");
+        switch (scanner.nextInt()) {
+            case 1:
+                this.gender = 'M';
+                break;
+            case 2:
+                this.gender = 'F';
+                break;
+        }
+
+    }
+
+    public void setNameInCharge() {
+        System.out.print("Nome do encarregado: ");
+        this.nameInCharge = scanner.next();
+    }
+
+    public void setEmail() {
+        System.out.print("E-mail: ");
+        this.email = scanner.next();
+    }
+
+    public void setPassword() {
+        String password, confirmPassword;
+
+        while (true) {
+            System.out.print("password: ");
+            password = scanner.next();
+            System.out.print("Confirmar password: ");
+            confirmPassword = scanner.next();
+            if (password.equals(confirmPassword)) {
+                this.password = password;
+                break;
+            } else {
+                System.out.println("password Incorrecta!");
+            }
+        }
+    }
+
+    public void setBirthDate() {
+        System.out.print("Data de nascimento(dd/mm/aaaa): ");
+        this.birthDate = scanner.next();
+    }
+
+    public void setLastName() {
+        System.out.print("Sobrenome: ");
+        this.lastName = scanner.next();
+    }
+
+    public void setYear(byte year) {
+        this.year = year;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    public void setNumber(byte number) {
+        this.number = number;
+    }
+
+    public void setStream(String stream) {
+        this.stream = stream;
+    }
+
+    public void setStudentCode(int studentCode) {
+        this.studentCode = studentCode;
+    }
+
+    public void setCurrentBalance(double currentBalance) {
+        this.currentBalance = currentBalance;
     }
 
     public void setDebtBalance(double debtBalance) {
         this.debtBalance = debtBalance;
     }
-
-    public Scanner getScanner() {
-        return scanner;
-    }
-
-    public void setScanner(Scanner scanner) {
-        this.scanner = scanner;
-    }
-
 }
