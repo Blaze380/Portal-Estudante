@@ -1,0 +1,7 @@
+"name":Niuro
+"lastname":Orlando
+"birthdate":11/05/2005
+"nameincharge":Blaze
+"phone":860842024
+"gender":M
+"email":blaze@gmail.com

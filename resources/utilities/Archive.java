@@ -17,6 +17,7 @@ public final class Archive {
      * @see #createDiretoryPath
      */
     public void createFile(String fileName, String fileContent, File filePath) {
+
         fileName = insertFileFormatAndName(fileName, ".txt");
         // Creating the file
         try (FileWriter file = new FileWriter(filePath + File.separator + fileName);) {
@@ -72,7 +73,7 @@ public final class Archive {
     }
 
     /**
-     * Load And reads the file line By line
+     * Load And reads the a line By line
      *
      * @param lineSkipper times to skip the lines that was already read
      * @param filePath    the path of the file to be read
@@ -80,6 +81,7 @@ public final class Archive {
      * @throws IOException
      * @return A single line of the file content
      * @see #stringBuilder
+     * @see #lineCounter
      */
     public String loadAndReadFile(int lineSkipper, File filePath, String fileName) {
         String fileContent = "";
@@ -113,22 +115,25 @@ public final class Archive {
         return builder.toString();
     }
 
-    public int contadorLinha(File diretorio, String arquivo, String tipo) {
-        int contador = 0;
-        try (FileReader leitorArquivo = new FileReader(diretorio + arquivo)) {
-            String linha = "";
-            BufferedReader leitorLinha = new BufferedReader(leitorArquivo);
-            switch (tipo) {
-                case "log":
-                    leitorLinha.readLine();
-                    break;
-            }
-            while ((linha = leitorLinha.readLine()) != null) {
-                contador++;
+    /**
+     * Verifies how many lines a file has before read it
+     * 
+     * @param diretoryPath The path of the file
+     * @param fileName     the file name
+     * @return number of lines
+     */
+    public int lineCounter(File diretoryPath, String fileName) {
+        int lineCounter = 0;
+        try (FileReader fileReader = new FileReader(diretoryPath + fileName)) {
+            String currentLine = "";
+            BufferedReader lineReader = new BufferedReader(fileReader);
+
+            while ((currentLine = lineReader.readLine()) != null) {
+                lineCounter++;
             }
         } catch (Exception e) {
         }
-        return contador;
+        return lineCounter;
     }
 }
 
@@ -144,16 +149,16 @@ public final class Archive {
 // /**
 // * Este Método lê o arquivo
 // */
-// try (FileReader leitorArquivo = new FileReader(arquivo.diretorio(".\\dados")
+// try (FileReader fileReader = new FileReader(arquivo.diretorio(".\\dados")
 // + "\\log_estudantes.txt")) {
 // /**
-// * O leitorLinha serve para ler cada linha no arquivo
+// * O lineReader serve para ler cada linha no arquivo
 // */
-// BufferedReader leitorLinha = new BufferedReader(leitorArquivo);
+// BufferedReader lineReader = new BufferedReader(fileReader);
 // String dadoEstudante = "";
 // String linha;
-// leitorLinha.readLine();
-// while ((linha = leitorLinha.readLine()) != null) {
+// lineReader.readLine();
+// while ((linha = lineReader.readLine()) != null) {
 // /**
 // * Insere a linha lida para a StringBuilder "content"
 // */

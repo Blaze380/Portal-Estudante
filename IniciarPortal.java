@@ -1,5 +1,3 @@
-//javac IniciarPortal.java Config.java BaseDisciplina.java Disciplina.java Estudante.java Docente.java
-
 import resources.configurations.Configuration;
 import resources.configurations.SecondaryThread;
 import resources.menu.MainMenus;
@@ -24,7 +22,6 @@ final class IniciarPortal extends Configuration implements Runnable {
         loadThreads();
         thread[0].getThread().start();
         mainMenu();
-        // registrarEstudante();
     }
 
     static void mainMenu() {
@@ -45,8 +42,8 @@ final class IniciarPortal extends Configuration implements Runnable {
     static void studentSignup() {
         int currentPosition = var.getStudentFreePosition();
         registerStudentData(currentPosition);
-        var.setCurrentStudentPosition(currentPosition + 1);
-        studentMenu(var.getCurrentStudentPosition());
+        var.setStudentFreePosition(currentPosition + 1);
+        studentMenu(currentPosition);
     }
 
     static void studentSignin() {
@@ -137,26 +134,6 @@ final class IniciarPortal extends Configuration implements Runnable {
         int position = var.getCurrentStudentPosition();
         String personalData = student[position].printPersonalData();
         option = menu.studentPersonalData(personalData);
-    }
-
-    static void loginMenu() {
-        cleanConsole();
-        System.out.println("                                                   1 - Fazer Login");
-        System.out.println("                                                   2 - Criar conta");
-        System.out.println("                                                      0 - Voltar");
-        System.out.print("Opcao:");
-        var.setOption(var.getScanner().nextInt());
-        switch (var.getOption()) {
-            case 1:
-                break;
-            case 2:
-                // registrarEstudante();
-                break;
-            case 0:
-                mainMenu();
-                break;
-
-        }
     }
 
     @Override
