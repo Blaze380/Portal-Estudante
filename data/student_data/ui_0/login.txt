@@ -1,2 +1,0 @@
-"name":ui
-"password":a

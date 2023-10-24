@@ -1,7 +1,0 @@
-"name":Niuro
-"lastname":blaze
-"birthdate":umlando
-"nameincharge":magumba
-"phone":7846
-"gender":M
-"email":blaze@gmail.com

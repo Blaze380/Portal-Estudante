@@ -1,7 +1,0 @@
-"name":a
-"lastname":a
-"birthdate":a
-"nameincharge":a
-"phone":1
-"gender":M
-"email":1

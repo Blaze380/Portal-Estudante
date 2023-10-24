@@ -1,7 +1,0 @@
-"name":ui
-"lastname":kk
-"birthdate":kkk
-"nameincharge":k
-"phone":8
-"gender":M
-"email":a

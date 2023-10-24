@@ -1,7 +1,0 @@
-"nome":Niuro
-"sobrenome":dsg
-"datanascimento":3
-"nomeencarregado":1
-"celular":2
-"genero":M
-"email":4tgr

@@ -1,2 +1,0 @@
-"name":Niuro
-"password":blaze
