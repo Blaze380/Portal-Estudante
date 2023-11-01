@@ -3,6 +3,7 @@ package com.ustmportal.resources.utilities;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -138,23 +139,23 @@ public final class Archive {
     }
 
     /**
-     * Returns the path of a specified a student data
+     * Returns the path of a specified a student data to lower case
      * 
-     * @param studentName The Student name
+     * @param studentUserName The Student username
      * @return The Path that contains the student data
      */
-    public String getStudentPath(String studentName) {
-        return ".\\data\\student_data\\" + studentName.toLowerCase();
+    public String getStudentPath(String studentUserName) {
+        return ".\\data\\student_data\\" + studentUserName.toLowerCase();
     }
 
     /**
-     * Returns the path of a specified teacher data
+     * Returns the path of a specified teacher data to lower case
      * 
-     * @param teacherName The teacher name
+     * @param teacherUserName The teacher username
      * @return Teacher path that contains his data
      */
-    public String getTeacherPath(String teacherName) {
-        return ".\\data\\teacher_data\\" + teacherName.toLowerCase();
+    public String getTeacherPath(String teacherUserName) {
+        return ".\\data\\teacher_data\\" + teacherUserName.toLowerCase();
     }
 
     /**
@@ -184,9 +185,10 @@ public final class Archive {
      */
     public String loadAndReadFile(int lineSkipper, File filePath, String fileName) {
         String fileContent = "";
-        try (FileReader fileReader = new FileReader(filePath + fileName)) {
-            BufferedReader lineReader = new BufferedReader(fileReader);
-            String currentLine = "";
+        FileReader fileReader = getFileReader(filePath, fileName);
+        BufferedReader lineReader = getBufferedReader(fileReader);
+        String currentLine = "";
+        try {
             if (lineSkipper == 1) {
                 currentLine = lineReader.readLine();
             } else if (lineSkipper > 1) {
@@ -195,9 +197,38 @@ public final class Archive {
                 }
             }
             fileContent = stringBuilder(currentLine);
-        } catch (Exception e) {
+        } catch (IOException e) {
+
         }
+
         return fileContent;
+    }
+
+    /**
+     * Returns a FileReader object
+     * 
+     * @param filePath Path of the file
+     * @param fileName Name of the file
+     * @return Filereader object
+     */
+    public FileReader getFileReader(File filePath, String fileName) {
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(filePath + fileName);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return fileReader;
+    }
+
+    /**
+     * Returns a object that reads a file, line by line (BufferedReader)
+     * 
+     * @param fileReader fileReader Object
+     * @return buffered reader object
+     */
+    public BufferedReader getBufferedReader(FileReader fileReader) {
+        return new BufferedReader(fileReader);
     }
 
     /**

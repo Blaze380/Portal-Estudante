@@ -1,6 +1,6 @@
 package com.ustmportal.resources.utilities;
 
-public class StringConversions {
+public class Conversions {
 
     /*
      * USELESS FOR A WHILE
