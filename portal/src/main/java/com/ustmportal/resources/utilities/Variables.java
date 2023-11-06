@@ -7,7 +7,8 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class Variables {
+@Deprecated
+public final class Variables {
 
     private Scanner scanner = new Scanner(System.in);
 

@@ -2,13 +2,14 @@ package com.ustmportal;
 
 import com.ustmportal.resources.menu.StudentMenus;
 import com.ustmportal.resources.menu.TeacherMenus;
+
 import com.ustmportal.resources.menu.Menus;
 
 final class App {
     final static StudentMenus studentMenus = new StudentMenus();
     final static TeacherMenus teacherMenu = new TeacherMenus();
     final static Menus menu = new Menus();
-    static int option = 1;
+    static byte option = 1;
 
     public static void main(String[] args) {
         while (true) {
@@ -21,7 +22,7 @@ final class App {
         option = menu.mainMenu();
         switch (option) {
             case 1:
-                // TODO Teacher menu here!
+                teacherMenu.chooseSigninOrSignup();
                 break;
             case 2:
 

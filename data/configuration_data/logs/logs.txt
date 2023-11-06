@@ -1,0 +1,6 @@
+[DEBUG] INITIALIZING APP....
+[INFO] Emulandini
+[WARNING] cuidado!!!!
+[INFO] Verifiying user...
+[INFO] Setting password
+[INFO] File Read.

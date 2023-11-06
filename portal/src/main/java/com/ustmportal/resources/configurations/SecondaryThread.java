@@ -7,10 +7,10 @@ import lombok.Setter;
  * The use of this class, is to make many thread with it's functionalities and
  * NullPointerException!!!
  */
-@Setter
+
 @Getter
 public final class SecondaryThread {
-
+    @Setter
     private Thread thread;
     @Deprecated
     private int numberOfWorks;
@@ -26,12 +26,32 @@ public final class SecondaryThread {
 
     private boolean threadHasFinishedWorking;
 
-    public boolean threadHasSuspended;
+    private boolean threadHasSuspended;
 
+    @Setter
+    private boolean threadHasBeenFinalized;
+
+    @Setter
     private String currentWork;
 
     public SecondaryThread() {
         this.threadHasSuspended = true;
+        this.threadHasBeenFinalized = false;
+    }
+
+    public void stopWork() {
+        threadHasFinishedWorking = true;
+        threadHasSuspended = true;
+    }
+
+    public void setSecondThreadWork(String threadWork) {
+        currentWork = threadWork;
+        startWork();
+    }
+
+    public void startWork() {
+        threadHasFinishedWorking = false;
+        threadHasSuspended = false;
     }
 
 }

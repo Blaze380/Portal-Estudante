@@ -1,5 +1,7 @@
 package com.ustmportal.resources.utilities;
 
+import com.ustmportal.resources.logs.Log;
+
 public class Conversions {
 
     /*
@@ -11,7 +13,18 @@ public class Conversions {
         try {
             number = Integer.parseInt(stringToConvert);
         } catch (NumberFormatException e) {
-            System.out.println("Error While converting!");
+            Log.error(e, "Erro While converting from string to int!");
+        }
+        return number;
+    }
+
+    public byte toByte(String stringToConvert) {
+        byte number = 0;
+        try {
+            number = Byte.parseByte(stringToConvert);
+        } catch (NumberFormatException e) {
+            Log.error(e, "Erro While converting from string to byte!");
+
         }
         return number;
     }
@@ -21,7 +34,7 @@ public class Conversions {
         try {
             number = Double.parseDouble(stringToConvert);
         } catch (NumberFormatException e) {
-            System.out.println("Error While converting!");
+            Log.error(e, "Erro While converting from string to double!");
         }
         return number;
     }

@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public final class Archive {
-    private Properties prop = new Properties();
+    final private Properties prop = new Properties();
 
     /**
      * It allows you to set Properties in the file, before you create it
@@ -122,7 +122,6 @@ public final class Archive {
         // Creating the file
         try (FileWriter file = new FileWriter(filePath + File.separator + fileName);) {
             file.write(fileContent);
-            System.out.println(fileName.toUpperCase() + " criado com sucesso!");
         } catch (IOException e) {
         }
     }
@@ -165,7 +164,7 @@ public final class Archive {
      * @return filePath object
      */
     public File createDiretoryPath(String path) {
-        File filePath = new File(path);
+        final File filePath = new File(path);
         if (!filePath.exists()) {
             filePath.mkdirs();
         }
@@ -185,8 +184,8 @@ public final class Archive {
      */
     public String loadAndReadFile(int lineSkipper, File filePath, String fileName) {
         String fileContent = "";
-        FileReader fileReader = getFileReader(filePath, fileName);
-        BufferedReader lineReader = getBufferedReader(fileReader);
+        final FileReader fileReader = getFileReader(filePath, fileName);
+        final BufferedReader lineReader = getBufferedReader(fileReader);
         String currentLine = "";
         try {
             if (lineSkipper == 1) {
@@ -240,7 +239,7 @@ public final class Archive {
      * @see #loadAndReadFile
      */
     private String stringBuilder(String currentlineToString) {
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         builder.append(currentlineToString);
         return builder.toString();
     }
@@ -255,7 +254,7 @@ public final class Archive {
     public int lineCounter(File diretoryPath, String fileName) {
         int lineCounter = 0;
         try (FileReader fileReader = new FileReader(diretoryPath + fileName)) {
-            BufferedReader lineReader = new BufferedReader(fileReader);
+            final BufferedReader lineReader = new BufferedReader(fileReader);
 
             while ((lineReader.readLine()) != null) {
                 lineCounter++;

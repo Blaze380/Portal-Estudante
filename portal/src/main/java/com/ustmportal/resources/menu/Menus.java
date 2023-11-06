@@ -9,7 +9,7 @@ import com.ustmportal.resources.utilities.Conversions;
 public class Menus extends Conversions {
     private Scanner scanner = new Scanner(System.in);
     Teacher Teacher;
-    private int option = 0;
+    private byte option = 0;
 
     private String getScanner() {
         return scanner.nextLine();
@@ -20,9 +20,9 @@ public class Menus extends Conversions {
      * 
      * @return option
      */
-    public int mainMenu() {
+    public byte mainMenu() {
         cleanConsole();
-        println("Powered By BL4Z3 \n\n\n\n");
+        println("Powered By BL4Z3 \n\n");
         println("                                        * * * * * * * * * * * * * * * * * * * ");
         println("                                        *                                   *");
         println("                                        *       P O R T A L   U S T M       *");
@@ -32,15 +32,15 @@ public class Menus extends Conversions {
         println("                                               2 - Login como Estudante");
         println("                                                       0 - Sair");
         print("Opcao:");
-        option = toInt(getScanner());
+        option = toByte(getScanner());
         return option;
     }
 
-    public int confirmRegister() {
+    public byte confirmRegister() {
         cleanConsole();
         println("Voce deseja confirmar o seu registro? \n1 - Sim \n2 - nao \n\n\n");
         print("Opcao:");
-        option = toInt(getScanner());
+        option = toByte(getScanner());
         return option;
     }
 
@@ -54,19 +54,6 @@ public class Menus extends Conversions {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
         }
-    }
-
-    /**
-     * Prints if the user confirm the changes
-     * 
-     * @return option
-     */
-    public int confirmChanges() {
-        cleanConsole();
-        println("Voce deseja alterar? \n1 - Sim \n2 - nao \n\n\n");
-        print("Opcao:");
-        option = toInt(getScanner());
-        return option;
     }
 
     /**
