@@ -27,25 +27,6 @@ public final class JsonFiles {
         file.createFile("data", userData, userPath, jsonFileFormat);
     }
 
-    // TODO remove this useless code!!!
-    // public void saveStudentData(Student student) {
-    // String studentUserName = student.getUserName();
-    // File studentPath =
-    // file.createDiretoryPath(file.getStudentPath(studentUserName));
-    // String studentData = gson.toJson(student);
-    // // saveUserData(studentPath, studentData);
-    // Log.info("Student saved sucessifuly!");
-    // }
-
-    // public void saveTeacherData(Teacher teacher) {
-    // String teacherUserName = teacher.getUserName();
-    // File teacherPath =
-    // file.createDiretoryPath(file.getTeacherPath(teacherUserName));
-    // String teacherData = gson.toJson(teacher);
-    // // saveUserData(teacherPath, teacherData);
-    // Log.info("Teacher saved sucessifuly");
-    // }
-
     /**
      * Verifies if the student that it's trying to signin, exists
      * 
@@ -96,20 +77,5 @@ public final class JsonFiles {
         Generic<?> object = new Generic<>(gson.fromJson(userData, userGenericObject.getGenericObject().getClass()));
         return object;
     }
-    // TODO remove this useless code!!!
-    // public Student loadStudentData(String studentUserName) {
-    // File studentPath =
-    // file.createDiretoryPath(file.getStudentPath(studentUserName));
-    // String studentData = readUserData(studentPath);
-    // Student student = gson.fromJson(studentData, Student.class);
-    // return student;
-    // }
 
-    // public Teacher loadTeacherData(String teacherUserName) {
-    // File teacherPath =
-    // file.createDiretoryPath(file.getTeacherPath(teacherUserName));
-    // String teacherData = readUserData(teacherPath);
-    // Teacher teacher = gson.fromJson(teacherData, Teacher.class);
-    // return teacher;
-    // }
 }

@@ -64,7 +64,7 @@ public class Log implements Runnable {
     }
 
     private static void createLogFile(String message) {
-        verifiyIfFileWasCreated();// TODO
+        verifiyIfFileWasCreated();
         File filePath = file.createDiretoryPath(log.getLogPath());
         file.createFile(log.getFileName(), log.getOldMessage() + message, filePath, log.getFileFormat());
     }
