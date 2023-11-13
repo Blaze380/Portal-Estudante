@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import com.ustmportal.resources.configurations.SecondaryThread;
 import com.ustmportal.resources.logs.Log;
-import com.ustmportal.resources.student.Student;
 import com.ustmportal.resources.teacher.Teacher;
 import com.ustmportal.resources.utilities.Animations;
 import com.ustmportal.resources.utilities.Archive;
@@ -33,9 +32,13 @@ public class TeacherMenus extends Conversions implements Runnable, MenuBase {
 
     @Override
     public void startThread() {
-        final TeacherMenus menu = new TeacherMenus();
-        thread.setThread(new Thread(menu));
-        thread.getThread().start();
+        if (!thread.isThreadHasStarted()) {
+            thread.setThreadHasStarted(true);
+            final TeacherMenus menu = new TeacherMenus();
+            thread.setThread(new Thread(menu));
+            thread.getThread().setName("Teacher");
+            thread.getThread().start();
+        }
     }
 
     /**
@@ -120,8 +123,7 @@ public class TeacherMenus extends Conversions implements Runnable, MenuBase {
 
     @Override
     public void run() {
-        while (!thread.isThreadHasBeenFinalized()) {
-
+        while (true) {
             while (thread.isThreadHasSuspended()) {
                 it.animate(100);
             }
@@ -131,17 +133,15 @@ public class TeacherMenus extends Conversions implements Runnable, MenuBase {
 
     @Override
     public void threadWork() {
-        if (!thread.isThreadHasBeenFinalized()) {
-            switch (thread.getCurrentWork()) {
-                case "loadData":
-                    getTeacherData();
-                    break;
-                case "saveData":
-                    setTeacherData();
-                    break;
-            }
-            thread.stopWork();
+        switch (thread.getCurrentWork()) {
+            case "loadData":
+                getTeacherData();
+                break;
+            case "saveData":
+                setTeacherData();
+                break;
         }
+        thread.stopWork();
     }
 
     /**
@@ -190,9 +190,6 @@ public class TeacherMenus extends Conversions implements Runnable, MenuBase {
                     break;
                 case 0:
                     quit = !quit;
-                    thread.setThreadHasBeenFinalized(true);
-                    thread.startWork();
-                    // thread.getThread().interrupt();
                 default:
                     it.specificAnimatedMessage("opcao incorrecta!", 2000);
                     break;

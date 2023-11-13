@@ -70,8 +70,10 @@ public class StudentMenus extends Conversions implements Runnable, MenuBase {
                     break;
                 case 0:
                     quit = !quit;
-                    thread.setThreadHasBeenFinalized(true);
-                    thread.startWork();
+                    // TODO remove this
+                    // thread.setThreadHasBeenFinalized(true);
+                    // thread.startWork();
+                    // thread.kill();
                     // thread.getThread().interrupt();
                     break;
                 default:
@@ -189,9 +191,14 @@ public class StudentMenus extends Conversions implements Runnable, MenuBase {
 
     @Override
     public void startThread() {
-        final StudentMenus menu = new StudentMenus();
-        thread.setThread(new Thread(menu));
-        thread.getThread().start();
+        if (!thread.isThreadHasStarted()) {
+            thread.setThreadHasStarted(true);
+            final StudentMenus menu = new StudentMenus();
+            thread.setThread(new Thread(menu));
+            thread.getThread().setName("Student");
+            thread.getThread().start();
+        }
+
     }
 
     /**
@@ -199,7 +206,6 @@ public class StudentMenus extends Conversions implements Runnable, MenuBase {
      */
     @Override
     public void chooseSigninOrSignup() {
-        Log.info("Emulandini");
         startThread();
         it.cleanConsole();
         sys.println("                                   * * * *   L O G A R   E S T U D A N  T E   * * * *\n\n");
@@ -278,8 +284,7 @@ public class StudentMenus extends Conversions implements Runnable, MenuBase {
 
     @Override
     public void run() {
-        while (!thread.isThreadHasBeenFinalized()) {
-
+        while (true) {
             while (thread.isThreadHasSuspended()) {
                 it.animate(100);
             }
@@ -289,17 +294,15 @@ public class StudentMenus extends Conversions implements Runnable, MenuBase {
 
     @Override
     public void threadWork() {
-        if (!thread.isThreadHasBeenFinalized()) {
-            switch (thread.getCurrentWork()) {
-                case "loadData":
-                    getStudentData();
-                    break;
-                case "saveData":
-                    setStudentData();
-                    break;
-            }
-            thread.stopWork();
+        switch (thread.getCurrentWork()) {
+            case "loadData":
+                getStudentData();
+                break;
+            case "saveData":
+                setStudentData();
+                break;
         }
+        thread.stopWork();
     }
 
     /**

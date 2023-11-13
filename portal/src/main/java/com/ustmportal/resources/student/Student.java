@@ -12,6 +12,7 @@ public final class Student extends Subject {
     private String lastName;
     private String birthDate;
     private String nameInCharge;
+    public SubjectBase a = new SubjectBase();
     private int phone;
     private char gender;
     private String email;

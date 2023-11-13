@@ -1,7 +1,5 @@
 package com.ustmportal.resources.utilities;
 
-import java.io.IOException;
-
 import com.ustmportal.resources.logs.Log;
 
 public final class Animations {
@@ -40,7 +38,7 @@ public final class Animations {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.error(e, "Thread was interrupted while using sleep method!");
         }
     }
 
@@ -49,7 +47,6 @@ public final class Animations {
             Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
             Log.error(e, "Thread was interrupted while using sleep method!");
-            // TODO e.printStackTrace();
         }
     }
 }

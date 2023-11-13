@@ -17,18 +17,12 @@ public class Log implements Runnable {
     private final static Animations it = new Animations();
     private final static SecondaryThread thread = new SecondaryThread();
     private final static LogAttributes log = new LogAttributes();
-    private static boolean initThread = false;
 
-    // private static String logMessage = "";
-    // private final static String logPath = ".\\data\\configuration_data\\logs";
-    // private final static String fileName = "logs";
-    // private final static String fileFormat = ".txt";
-    // private static boolean log.getCanReadFile() = false;
-    // private static String oldMessage = "[DEBUG] INITIALIZING APP....";
     private static void init() {
-        if (!initThread) {
-            initThread = !initThread;
+        if (!thread.isThreadHasStarted()) {
+            thread.setThreadHasStarted(true);
             thread.setThread(new Thread(new Log()));
+            thread.getThread().setName("Logging");
             thread.getThread().start();
         }
     }
@@ -79,6 +73,7 @@ public class Log implements Runnable {
         addMessage(type, message);
     }
 
+    
     public static void error(Exception exception, String message) {
         final String type = "[ERROR] ";
         message = type + message + "\nException Details: " + exception.getMessage();

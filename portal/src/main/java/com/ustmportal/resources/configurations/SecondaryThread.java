@@ -23,12 +23,15 @@ public final class SecondaryThread {
 
     @Deprecated
     private int currentThreadNumber;
+    @Setter
+    private boolean threadHasStarted;
 
     private boolean threadHasFinishedWorking;
 
     private boolean threadHasSuspended;
 
     @Setter
+    @Deprecated
     private boolean threadHasBeenFinalized;
 
     @Setter
